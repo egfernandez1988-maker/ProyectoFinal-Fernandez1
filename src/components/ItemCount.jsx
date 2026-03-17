@@ -6,7 +6,11 @@ const ItemCount = ({ stock, initial, item }) => {
   const [added, setAdded] = useState(false);
   const { addItem } = useContext(CartContext);
 
-  const increment = () => count < stock && setCount(count + 1);
+  const increment = () => {
+  if (count < stock) {
+    setCount(count + 1);
+  }
+};
   const decrement = () => count > 1 && setCount(count - 1);
 
   const handleAdd = () => {
@@ -26,8 +30,10 @@ const ItemCount = ({ stock, initial, item }) => {
           <span>{count}</span>
           <button onClick={increment}>+</button>
           <button onClick={handleAdd}>Agregar al carrito</button>
+          <p>Stock disponible: {stock}</p>
         </>
-      ) : (
+      ) :
+      (
         <p>Agregado al carrito ✅</p>
       )}
     </div>
